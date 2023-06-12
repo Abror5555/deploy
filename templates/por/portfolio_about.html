@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Portfolio_{% endblock title %}
+{% block aside %}
+              
+{% for menu in menu_bar %}      
+<div class="aside">
+    <div class="logo">
+        <a href="{% url 'home' %}"><span>{{ menu.a  }}</span>{{ menu.title }}</a>
+    </div>
+    <div class="nav-toggler">
+        <span></span>
+    </div>
+    <ul class="nav">
+        <li><a href="{% url 'home' %}"><i class="fa fa-home"></i>{{ menu.home }}</a></li>
+        <li><a href="{% url 'about' %}"><i class="fa fa-user"></i>{{ menu.about }}</a></li>
+        <li><a href="{% url 'services' %}"><i class="fa fa-list"></i>{{ menu.services }}</a></li>
+        <li><a href="{% url 'portfolio' %}" class="active"><i class="fa fa-briefcase"></i>{{ menu.portfolio }}</a></li>
+        <li><a href="{% url 'contact' %}"><i class="fa fa-comments"></i>{{ menu.contact }}</a></li>
+    </ul>
+</div>
+{% endfor %}
+
+{% endblock aside %}
+
+
+{% block content %}
+    <!-- ======== Portfolio Section Start ========= -->
+    <section class="portfolio section" id="portfolio">
+        <div class="container">
+            <div class="row">
+                {% for p in portfel %}
+                <div class="section-title padd-15">
+                    <h2>{{ p.title }}</h2>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="row">
+                {% for p in portfel %}
+                <div class="portfolio-heading padd-15">
+                    <h2>{{ p.projects }} : {{ rest_count }}</h2>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="row">
+                {% for r in rest %}            
+                <!-- ======= portfolio item start ======= -->
+                <div class="portfolio-item1 padd-15">
+                    <div class="portfolio-item-inner1 shadow-dark">
+                        <div class="portfolio-img">
+                            <img src="{{ r.image.url }}" alt="">
+                        </div>
+                        <hr>
+                        <h1>{{ r.title }}</h1>
+                        <p class="desk">{{ r.body }}</p>
+                        <hr>
+                        <p class="created">{{ r.created_time }} : {{ r.created_ad }}</p>
+                        <div class="row padd-15">
+                            
+                            <!-- <p class="eye"><img src="{% static 'home/images/eye.png' %}" alt=""></p>
+                            <p class="eye1"> : 11</p> -->
+                        </div>
+                        <hr>
+                        {% comment %} {% if r.is_available == True %} {% endcomment %}
+                        <a href="{{ r.link }}" class="code-btn">{{ r.button }}</a>
+                        <a href="{{ r.site_link }}" class="code-btn">{{ r.button1 }}</a>
+                        {% comment %} {% else %} {% endcomment %}
+                        {% comment %} <a href="#" class="code-btn">The codes are quite outdated</a> {% endcomment %}
+                        {% comment %} {% endif %} {% endcomment %}
+                        <!-- <pre>
+                            <span>wedcec</span>
+                            <span>dcwsc</span>
+                            <span>wecfacsac</span>
+                            <span>cdevess</span>
+                        </pre> -->
+                    </div>
+                </div>
+                <!-- ======= portfolio item End ======= -->
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- ======== Portfolio_detail Section End ========= -->
+{% endblock content %}
+

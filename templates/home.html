@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Home{% endblock title %}
+
+        
+{% block aside %}
+            
+{% for menu in menu_bar %}      
+<div class="aside">
+    <div class="logo">
+        <a href="{% url 'home' %}"><span>{{ menu.a  }}</span>{{ menu.title }}</a>
+    </div>
+    <div class="nav-toggler">
+        <span></span>
+    </div>
+    <ul class="nav">
+        <li><a href="{% url 'home' %}" class="active"><i class="fa fa-home"></i>{{ menu.home }}</a></li>
+        <li><a href="{% url 'about' %}"><i class="fa fa-user"></i>{{ menu.about }}</a></li>
+        <li><a href="{% url 'services' %}"><i class="fa fa-list"></i>{{ menu.services }}</a></li>
+        <li><a href="{% url 'portfolio' %}"><i class="fa fa-briefcase"></i>{{ menu.portfolio }}</a></li>
+        <li><a href="{% url 'contact' %}"><i class="fa fa-comments"></i>{{ menu.contact }}</a></li>
+    </ul>
+</div>
+{% endfor %}
+
+{% endblock aside %}
+<!-- ======= Aside End ======== -->
+
+
+{% block content %}
+    <!-- ======== Home Section Start ========= -->
+    <section class="home active section" id="home"> 
+        <div class="container">
+            <div class="row">
+                {% for a in site %}
+                <div class="home-info padd-15">
+                    <h3 class="hello">{{ a.title }}     <span class="name"> {{ a.name }}</span></h3>
+                    <h3 class="my-profession">{{ a.work }}    <span class="typing">   {{ a.work_title }}</span></h3>
+                    <p>
+                        {{ a.body }}
+                    </p>
+                    <a href="{% url 'download_file' %}" class="btn">{{ a.download }}</a>
+                </div>
+                <div class="home-img padd-15">
+                    <img src="{{ a.image.url }}" alt="">
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- =========== Home Section End ======== -->
+{% endblock content %}
+    

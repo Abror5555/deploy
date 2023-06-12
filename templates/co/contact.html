@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact{% endblock title %}
+{% block aside %}
+              
+{% for menu in menu_bar %}      
+<div class="aside">
+    <div class="logo">
+        <a href="{% url 'home' %}"><span>{{ menu.a  }}</span>{{ menu.title }}</a>
+    </div>
+    <div class="nav-toggler">
+        <span></span>
+    </div>
+    <ul class="nav">
+        <li><a href="{% url 'home' %}"><i class="fa fa-home"></i>{{ menu.home }}</a></li>
+        <li><a href="{% url 'about' %}"><i class="fa fa-user"></i>{{ menu.about }}</a></li>
+        <li><a href="{% url 'services' %}"><i class="fa fa-list"></i>{{ menu.services }}</a></li>
+        <li><a href="{% url 'portfolio' %}"><i class="fa fa-briefcase"></i>{{ menu.portfolio }}</a></li>
+        <li><a href="{% url 'contact' %}" class="active"><i class="fa fa-comments"></i>{{ menu.contact }}</a></li>
+    </ul>
+</div>
+{% endfor %}
+
+{% endblock aside %}
+
+
+{% block content %}
+    <!-- ======== Cntact Section Start ========= -->
+    <section class="contact section" id="contact">
+        <div class="container">
+            <div class="row">
+                {% for k in contact_title %}
+                <div class="section-title padd-15">
+                    <h2>{{ k.title }}</h2>
+                </div>
+                {% endfor %}
+            </div>
+            {% for c in contact_body %}
+            <h3 class="contact-title padd-15">{{ c.title }}</h3>
+            <h4 class="contact-sub-title padd-15">{{ c.body }}</h4>
+            <div class="row">
+                <!-- ======= Contact info item start ====== -->
+                <a href="{{ c.number_link }}" class="contact-info-item padd-15">
+                    <div class="icon"><i class="fa fa-phone"></i></div>
+                    <h4>{{ c.phone }}</h4>
+                    <p>{{ c.number }}</p>
+                </a>
+                <!-- ======= Contact info item end ====== -->
+                <!-- ======= Contact info item start ====== -->
+                <a href="{{ c.office_link }}" class="contact-info-item padd-15">
+                    <div class="icon"><i class="fa fa-map-marker-alt"></i></div>
+                    <h4>{{ c.office }}</h4>
+                    <p>{{ c.location }}</p>
+                </a>
+                <!-- ======= Contact info item end ====== -->
+                <!-- ======= Contact info item start ====== -->
+                <a href="{{ c.email_link }}" class="contact-info-item padd-15">
+                    <div class="icon"><i class="fa fa-envelope"></i></div>
+                    <h4>{{ c.email }}</h4>
+                    <p>{{ c.Email_address }}</p>
+                </a>
+                <!-- ======= Contact info item end ====== --><!-- ======= Contact info item start ====== -->
+                <a href="{{ c.website_link }}" class="contact-info-item padd-15">
+                    <div class="icon"><i class="fa fa-globe-europe"></i></div>
+                    <h4>{{ c.website }}</h4>
+                    <p>{{ c.website_address }}</p>
+                </a>
+                <!-- ======= Contact info item end ====== -->
+            </div>
+            <h3 class="contact-title padd-15">{{ c.send_email }}</h3>
+            <h4 class="contact-sub-title padd-15">{{ c.message }}</h4>
+            <!-- ======== Contact form ======= -->
+            <div class="row">
+                <div class="contact-form padd-15">
+                    <form action="" method="POST">
+                        {% if massage %}
+                            <center><p style="color: red; margin-bottom: 20px;" >{{massage}}</p></center>
+                        {% endif %}
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="form-item col-6 padd-15">
+                                <div class="form-gorup">
+                                    <input type="text" name="name" class="form-control" placeholder="{{ c.name }}">
+                                </div>
+                            </div>
+                            <div class="form-item col-6 padd-15">
+                                <div class="form-gorup">
+                                    <input type="email" name="email" class="form-control" placeholder="{{ c.email_send }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-item col-12 padd-15">
+                                <div class="form-gorup">
+                                    <input type="text" name="subject" class="form-control" placeholder="{{ c.subject }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-item col-12 padd-15">
+                                <div class="form-gorup">
+                                    <textarea name="message" class="form-control" id="" placeholder="{{ c.message_send }}"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-item col-12 padd-15">
+                                <button type="submit" class="btn">{{ c.send_message }}</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    <!-- ======== Cntact Section End ========= -->
+{% endblock content %}
+    

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+{% load i18n %}
+{% load hitcount_tags %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio | {% block title %}{% endblock title %}</title>
+    <!-- ======= CSS FILES =====  -->
+    <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/skins/color-4.css' %}">
+    
+    <!-- ======= CDN JS ======= -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- ===== Style Switcher ========= -->
+    
+    <link rel="stylesheet" href="{% static 'home/css/skins/color-2.css' %}" class="alternate-style" title="color-1" disabled>
+    <link rel="stylesheet" href="{% static 'home/css/skins/color-2.css' %}" class="alternate-style" title="color-2" disabled>
+    <link rel="stylesheet" href="{% static 'home/css/skins/color-3.css' %}" class="alternate-style" title="color-3" disabled>
+    <link rel="stylesheet" href="{% static 'home/css/skins/color-4.css' %}" class="alternate-style" title="color-4" disabled>
+    <link rel="stylesheet" href="{% static 'home/css/skins/color-5.css' %}" class="alternate-style" title="color-5" disabled>
+    <link rel="stylesheet" href="{% static 'home/css/style-switcher.css' %}">
+    
+</head>
+<body>
+    <!-- ======= Main Container Start ======== -->
+
+    <div class="main-container">
+        <!-- ====== Aside Start ======= -->
+        
+        {% block aside %}
+
+        {% endblock aside %}
+        <!-- ======= Aside End ======== -->
+
+        <!-- ======= Main Content start ======== -->
+        <div class="main-content">
+            {% block content %}
+
+            {% endblock content %}
+        </div>
+    </div>
+    <!-- ==========Style Switcher Start ========= -->
+    
+    <div class="style-switcher">
+        <div class="style-switcher-toggle s-icon">
+            <i class="fas fa-cog fa-spin"></i>
+        </div>
+        
+        <div class="day-night s-icon">
+            <i class="fas "></i>
+        </div>
+        {% for menu in menu_bar %} 
+        <h4>{{ menu.color }}</h4>
+        <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+            <input name="next" type="hidden" value="{{ redirect_to }}">
+            <!-- <select name="language"> -->
+                {% get_current_language as LANGUAGE_CODE %}
+                {% get_available_languages as LANGUAGES %}
+                {% get_language_info_list for LANGUAGES as languages %}
+                {% for language in languages %}
+                <button type="submit" class="btn" style="margin-bottom: 10px;"><a href="/{{ language.code }}">{{ language.name_local }}</a></button>
+                    
+                {% endfor %}
+            <!-- </select> -->
+            <!-- <input type="submit" value="Go"> -->
+        </form>
+        {% endfor %}
+        <hr>
+        <div class="colors">
+            {% for r in range %}
+            <span class="colors-1" onclick="{{ r.color_1 }}"></span>
+            <span class="colors-2" onclick="setActiveStyle('color-2')"></span>
+            <span class="colors-3" onclick="setActiveStyle('color-3')"></span>
+            <span class="colors-4" onclick="setActiveStyle('color-4')"></span>
+            <span class="colors-5" onclick="setActiveStyle('color-5')"></span>
+            {% endfor %}
+        </div>
+    </div>
+    <!-- ==========Style Switcher End ========= -->
+
+    <!-- ========== JS FILES ====== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js" referrerpolicy="no-referrer"></script>
+    <script src="{% static 'home/js/script.js' %}"></script>
+    <script src="{% static 'home/js/style-switcher.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About{% endblock title %}
+
+{% block aside %}
+            
+        
+            
+{% for menu in menu_bar %}      
+<div class="aside">
+    <div class="logo">
+        <a href="{% url 'home' %}"><span>{{ menu.a  }}</span>{{ menu.title }}</a>
+    </div>
+    <div class="nav-toggler">
+        <span></span>
+    </div>
+    <ul class="nav">
+        <li><a href="{% url 'home' %}"><i class="fa fa-home"></i>{{ menu.home }}</a></li>
+        <li><a href="{% url 'about' %}" class="active"><i class="fa fa-user"></i>{{ menu.about }}</a></li>
+        <li><a href="{% url 'services' %}"><i class="fa fa-list"></i>{{ menu.services }}</a></li>
+        <li><a href="{% url 'portfolio' %}"><i class="fa fa-briefcase"></i>{{ menu.portfolio }}</a></li>
+        <li><a href="{% url 'contact' %}"><i class="fa fa-comments"></i>{{ menu.contact }}</a></li>
+    </ul>
+</div>
+{% endfor %}
+
+{% endblock aside %}
+
+
+{% block content %}
+    <!-- ======== About Section Start ========= -->
+    <section class="about section" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="section-title padd-15">
+                    {% for a in about %}
+                    <h2>{{ a.title }}</h2>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="about-content padd-15">
+                    <div class="row">
+                        {% for a in about %}
+                        <div class="about-text padd-15">
+                            <h3>{{ a.name }} <span> {{ a.work_name }}</span></h3>
+                            <p>
+                                {{ a.body }}
+                            </p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="row">
+                        <div class="personal-info padd-15">
+                            <div class="row">
+                                {% for b in information %}
+                                <div class="info-item padd-15">
+                                    <p>{{ b.title }} <span> {{ b.information }}</span></p>
+                                </div>
+                                {% endfor %}
+                                
+                            </div>
+                            <div class="row">
+                                {% for c in hire %}
+                                <div class="buttons padd-15">
+                                    <a href="{% url 'contact' %}" data-section-index="1" class="btn hire-me">{{ c.title }}</a>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="skills padd-15">
+                            <div class="row">
+                                {% for d in learning %}
+                                <div class="skill-item padd-15">
+                                    <h5>{{ d.name }}</h5>
+                                    <div class="progress">
+                                        <div class="progress-in" style="width: {{ d.witdh }}"></div>
+                                        <div class="skill-percent">{{ d.skill }}</div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="education padd-15">
+                            {% for e in exprement %}
+                            <h3 class="title">{{ e.education }}</h3>
+                            {% endfor %}
+                            <div class="row">
+                                <div class="timeline-box padd-15">
+                                    <div class="timeline shadow-dark">
+                                        <!-- ==== timeline ==== -->
+                                        {% for f in education %}
+                                        <div class="timeline-item">
+                                            <div class="circle-dot"></div>
+                                            <h3 class="timeline-date">
+                                                <i class="fa fa-calendar"></i> {{ f.created }}
+                                            </h3>
+                                            <h4 class="timeline-title">{{ f.title }}</h4>
+                                            <p class="timeline-text">
+                                                {{ f.body }}
+                                            </p>
+                                        </div>
+                                        {% endfor %}
+                                        <!-- ==== END timeline ==== -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="experience padd-15">
+                            {% for e in exprement %}
+                            <h3 class="title">{{ e.experience }}</h3>
+                            {% endfor %}
+                            <div class="row">
+                                <div class="timeline-box padd-15">
+                                    <div class="timeline shadow-dark">
+                                        <!-- ==== timeline ==== -->
+                                        {% for g in experience %}
+                                        <div class="timeline-item">
+                                            <div class="circle-dot"></div>
+                                            <h3 class="timeline-date">
+                                                <i class="fa fa-calendar"></i> {{ g.created }}
+                                            </h3>
+                                            <h4 class="timeline-title">{{ g.title }}</h4>
+                                            <p class="timeline-text">
+                                                {{ g.body }}
+                                            </p>
+                                        </div>
+                                        {% endfor %}
+                                        <!-- ==== END timeline ==== -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ======== About Section End ========= -->
+{% endblock content %}
+    
